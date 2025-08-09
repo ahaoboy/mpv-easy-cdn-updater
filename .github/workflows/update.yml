@@ -72,18 +72,18 @@ jobs:
           git add .
           git commit -am"update by ci"
 
-      - name: push
-        run: |
-          git remote set-url origin https://${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}@github.com/ahaoboy/mpv-easy-cdn.git
-          # git remote add origin https://github.com/ahaoboy/mpv-easy-cdn.git
-          git push --set-upstream origin main
-      # - name: Deploy to doc branch
-      #   uses: peaceiris/actions-gh-pages@v4
-      #   if: github.ref == 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}
-      #     external_repository: ahaoboy/mpv-easy-cdn
-      #     publish_dir: ./
-      #     publish_branch: main
-      #     force_orphan: true
-      #     cname: github.com
+      # - name: push
+      #   run: |
+      #     git remote set-url origin https://${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}@github.com/ahaoboy/mpv-easy-cdn.git
+      #     # git remote add origin https://github.com/ahaoboy/mpv-easy-cdn.git
+      #     git push --set-upstream origin main
+      - name: Deploy to doc branch
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}
+          external_repository: ahaoboy/mpv-easy-cdn
+          publish_dir: ./
+          publish_branch: main
+          force_orphan: true
+          cname: github.com
