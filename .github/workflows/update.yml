@@ -51,6 +51,9 @@ jobs:
         run: |
           pnpm run update-zip
           ls -l
+      - name: scripts-full.json
+        run: |
+          curl -L -o scripts-full.json https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/main/scripts-full.json
 
       - name: ls
         run: |
@@ -66,11 +69,11 @@ jobs:
           git init
           git config user.name "MPV_EASY_CDN_UPDATER"
           git config user.email "MPV_EASY_CDN_UPDATER@example.com"
-          git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
           git branch --set-upstream-to=origin/main main
-
 
           git add .
           git commit -am"update by ci"
           git gc --prune=now
+
+          git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
           git push
