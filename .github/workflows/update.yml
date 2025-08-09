@@ -69,11 +69,9 @@ jobs:
           git init
           git config user.name "MPV_EASY_CDN_UPDATER"
           git config user.email "MPV_EASY_CDN_UPDATER@example.com"
-          git branch --set-upstream-to=origin/main main
 
           git add .
           git commit -am"update by ci"
-          git gc --prune=now
 
           git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
           git push
