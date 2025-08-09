@@ -1,0 +1,23 @@
+{
+  "name": "mpv-easy-cdn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "update-base": "bun update-base.ts",
+    "update-zip": "bun update.ts",
+    "lint:fix": "deno fmt update.ts &&  deno lint --fix update.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "24.2.0"
+  },
+  "dependencies": {
+    "@easy-install/easy-archive": "0.2.6",
+    "@mpv-easy/mpsm": "0.1.15-alpha.14",
+    "lodash-es": "^4.17.21"
+  }
+}
