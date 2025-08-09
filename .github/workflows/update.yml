@@ -42,15 +42,15 @@ jobs:
         run: |
           ls -l
 
-      - name: update base
-        run: |
-          pnpm run update-base
-          ls -l
+      # - name: update base
+      #   run: |
+      #     pnpm run update-base
+      #     ls -l
 
-      - name: update-zip
-        run: |
-          pnpm run update-zip
-          ls -l
+      # - name: update-zip
+      #   run: |
+      #     pnpm run update-zip
+      #     ls -l
       - name: scripts-full.json
         run: |
           curl -L -o scripts-full.json https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/main/scripts-full.json
