@@ -5,18 +5,14 @@ permissions:
 
 on:
   push:
-    branches:
-      - dev
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "branch"
-        required: false
-        type: string
-        default: dev
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MPV_EASY_CDN_UPDATER_TOKEN: ${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}
+  USERNAME: ahaoboy
+  REPO_DESCRIPTION: "Created via MPV_EASY_CDN_UPDATER_TOKEN"
+  REPO_NAME: "mpv-easy-cdn"
 
 defaults:
   run:
@@ -27,8 +23,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || 'dev' }}
 
       - uses: oven-sh/setup-bun@v2
         with:
@@ -36,21 +30,13 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 10
-
-      - name: clear
+      - name: install
         run: |
-          git fetch origin
-          git checkout -b main origin/main
-          
-          ls -l
-          git config --global init.defaultBranch main
-          git config --global user.email "mpv-easy@mpv.com"
-          git config --global user.name "mpv-easy-cdn"
-          git config --global --type bool push.autoSetupRemote true
-
-          git reset --hard dev
-          # git checkout dev
           pnpm i
+
+      - name: delete mpv-easy-cdn
+        run: |
+          curl -s -X DELETE  -H "Authorization: token $MPV_EASY_CDN_UPDATER_TOKEN" -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/$USERNAME/$REPO_NAME"
 
       - name: ls
         run: |
@@ -66,28 +52,25 @@ jobs:
           pnpm run update-zip
           ls -l
 
-      - name: commit
-        run: |
-          git add .
-          git commit -am"update by ci"
-          git gc --prune=now
-
       - name: ls
         run: |
           ls -l
+      - name: create mpv-easy-cdn
+        run :  |
+          curl -s -X POST -H "Authorization: token $MPV_EASY_CDN_UPDATER_TOKEN" -H "Accept: application/vnd.github.v3+json" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$REPO_DESCRIPTION\",\"private\":false}")
+
       - name: push
         run: |
-          git checkout --orphan temp_main
-          git push origin temp_main:main --force
-          git branch -D temp_main
-          git push origin --all --force
+          rm -rf ./.git
+          git config --global init.defaultBranch main
+          git init
+          git config user.name "MPV_EASY_CDN_UPDATER"
+          git config user.email "MPV_EASY_CDN_UPDATER@example.com"
+          git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
+          git branch --set-upstream-to=origin/main main
 
-      # - name: push
-      #   uses: peaceiris/actions-gh-pages@v4
-      #   if: github.ref == 'refs/heads/dev'
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./
-      #     publish_branch: main
-      #     force_orphan: true
-      #     cname: github.com
+
+          git add .
+          git commit -am"update by ci"
+          git gc --prune=now
+          git push
