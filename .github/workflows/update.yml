@@ -42,15 +42,16 @@ jobs:
         run: |
           ls -l
 
-      # - name: update base
-      #   run: |
-      #     pnpm run update-base
-      #     ls -l
+      - name: update base
+        run: |
+          pnpm run update-base
+          ls -l
 
-      # - name: update-zip
-      #   run: |
-      #     pnpm run update-zip
-      #     ls -l
+      - name: update-zip
+        run: |
+          pnpm run update-zip
+          ls -l
+
       - name: scripts-full.json
         run: |
           curl -L -o scripts-full.json https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/main/scripts-full.json
@@ -77,13 +78,3 @@ jobs:
           git remote add origin https://github.com/ahaoboy/mpv-easy-cdn.git
           git remote set-url origin https://${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}@github.com/ahaoboy/mpv-easy-cdn.git
           git push --set-upstream origin main
-      # - name: Deploy to doc branch
-      #   uses: peaceiris/actions-gh-pages@v4
-      #   if: github.ref == 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}
-      #     external_repository: ahaoboy/mpv-easy-cdn
-      #     publish_dir: ./
-      #     publish_branch: main
-      #     force_orphan: true
-      #     cname: github.com
