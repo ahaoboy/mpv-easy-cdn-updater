@@ -74,4 +74,4 @@ jobs:
           git commit -am"update by ci"
 
           git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
-          git push
+          git push --set-upstream origin main
