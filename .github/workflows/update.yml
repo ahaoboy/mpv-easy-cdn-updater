@@ -62,16 +62,17 @@ jobs:
         run :  |
           curl -s -X POST -H "Authorization: token $MPV_EASY_CDN_UPDATER_TOKEN" -H "Accept: application/vnd.github.v3+json" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$REPO_DESCRIPTION\",\"private\":false}"
 
-      - name: push
+      - name: commit
         run: |
           rm -rf ./.git
           git config --global init.defaultBranch main
           git init
           git config user.name "MPV_EASY_CDN_UPDATER"
           git config user.email "MPV_EASY_CDN_UPDATER@example.com"
-
           git add .
           git commit -am"update by ci"
 
-          git remote add origin https://github.com/$USERNAME/$REPO_NAME.git
+      - name: push
+        run: |
+          git remote add origin https://github.com/ahaoboy/mpv-easy-cdn.git
           git push --set-upstream origin main
