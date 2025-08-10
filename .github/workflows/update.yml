@@ -11,7 +11,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   MPV_EASY_CDN_UPDATER_TOKEN: ${{ secrets.MPV_EASY_CDN_UPDATER_TOKEN }}
   USERNAME: ahaoboy
-  REPO_DESCRIPTION: "Created via MPV_EASY_CDN_UPDATER_TOKEN"
+  REPO_DESCRIPTION: "Created via MPV_EASY_CDN_UPDATER"
   REPO_NAME: "mpv-easy-cdn"
 
 defaults:

@@ -5,4 +5,5 @@ reduce the size
 
 - https://mpv-easy.github.io/mpv-build/
 - https://github.com/mpv-easy/mpsm-scripts
-- https://github.com/mpv-easy/mpv-easy-cdn
+- https://github.com/ahaoboy/mpv-easy-cdn
+- https://github.com/ahaoboy/mpv-easy-cdn-updater
