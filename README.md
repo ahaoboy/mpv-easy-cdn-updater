@@ -1,5 +1,6 @@
-This is the cdn repository for mpv-build, ffmpeg and yt-dlp are removed to
-reduce the size
+This is the cdn repository for mpv-build
+
+Since it is impossible to optimize the size of github .git, Maybe need find a free CDN that can host files around 500mb.
 
 ## Related Links
 
