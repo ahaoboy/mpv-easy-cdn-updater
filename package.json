@@ -13,11 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "24.2.0"
+    "@types/node": "24.3.0"
   },
   "dependencies": {
     "@easy-install/easy-archive": "0.2.6",
-    "@mpv-easy/mpsm": "0.1.15-alpha.14",
-    "lodash-es": "^4.17.21"
+    "@mpv-easy/mpsm": "0.1.15-alpha.16"
   }
 }
