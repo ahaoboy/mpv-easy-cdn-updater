@@ -3,10 +3,11 @@ import { encode, File, Fmt } from "@easy-install/easy-archive";
 import {
   downloadBinaryFromGithub,
   getScriptFiles,
+  type Script,
   tryFix,
 } from "@mpv-easy/mpsm";
 
-const DATA = JSON.parse(
+const DATA: Record<string, Script> = JSON.parse(
   await fetch(
     "https://raw.githubusercontent.com/mpv-easy/mpsm-scripts/main/scripts-full.json",
   ).then((i) => i.text()),
@@ -16,7 +17,7 @@ const DATA = JSON.parse(
 const MAX_ZIP_SIZE = 50 * 1024 * 1024;
 
 for (const name in DATA) {
-  const { download } = DATA[name] as Record<string, string>;
+  const { download } = DATA[name];
   const zipName = name + ".zip";
 
   if (![".js", ".lua", ".zip", ".conf"].some((i) => download.endsWith(i))) {
